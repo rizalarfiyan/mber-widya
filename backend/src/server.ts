@@ -3,6 +3,7 @@ import express, { type Express, json, urlencoded } from 'express'
 import helmet from 'helmet'
 import { pino } from 'pino'
 import env from '@/utils/env-config'
+import errorHandler from '@/middleware/error-handler'
 
 const logger = pino({ name: 'server' })
 const app: Express = express()
@@ -20,5 +21,11 @@ app.use(helmet())
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to the API!')
 })
+
+app.use((_req, res) => {
+  res.status(404).send('Not found')
+})
+
+app.use(errorHandler)
 
 export { app, logger }
