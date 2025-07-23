@@ -1,0 +1,16 @@
+{
+  "name": "backend",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^24.1.0",
+    "tsx": "^4.20.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
