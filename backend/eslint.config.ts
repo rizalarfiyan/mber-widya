@@ -11,7 +11,7 @@ export default config([
   importXFlatConfig.typescript,
   eslintPluginPrettierRecommended,
   {
-    ignores: ['**/dist/**', '**/node_modules/**'],
+    ignores: ['**/dist/**', '**/node_modules/**', '**/generated/**'],
   },
   {
     files: ['**/*.{ts}'],

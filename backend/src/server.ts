@@ -5,6 +5,8 @@ import { pino } from 'pino'
 import env from '@/utils/env-config'
 import errorHandler from '@/middleware/error-handler'
 import requestLogger from '@/middleware/request-logger'
+import docsRouter from '@/api/docs/docs-route'
+import baseRouter from '@/api/base/base-route'
 
 const logger = pino({ name: 'server' })
 const app: Express = express()
@@ -19,10 +21,8 @@ app.use(cors({ origin: env.CORS_ORIGIN, credentials: true }))
 app.use(helmet())
 app.use(requestLogger())
 
-// Base API
-app.get('/', (req, res) => {
-  res.status(200).send('Welcome to the API!')
-})
+app.use(baseRouter)
+app.use(docsRouter)
 
 app.use((_req, res) => {
   res.status(404).send('Not found')

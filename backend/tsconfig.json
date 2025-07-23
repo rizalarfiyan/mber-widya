@@ -20,6 +20,6 @@
             "@/*": ["src/*"]
         }
     },
-    "exclude": ["node_modules"],
-    "include": ["src/**/*.ts"]
+    "exclude": ["node_modules", "generated", "dist"],
+    "include": ["src/**/*.ts", "eslint.config.ts"]
 }
