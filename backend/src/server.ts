@@ -1,12 +1,13 @@
+import baseRouter from '@/api/base/base-route'
+import docsRouter from '@/api/docs/docs-route'
+import authRouter from '@/api/auth/auth-route'
+import errorHandler from '@/middleware/error-handler'
+import requestLogger from '@/middleware/request-logger'
+import env from '@/utils/env-config'
 import cors from 'cors'
 import express, { type Express, json, urlencoded } from 'express'
 import helmet from 'helmet'
 import { pino } from 'pino'
-import env from '@/utils/env-config'
-import errorHandler from '@/middleware/error-handler'
-import requestLogger from '@/middleware/request-logger'
-import docsRouter from '@/api/docs/docs-route'
-import baseRouter from '@/api/base/base-route'
 
 const logger = pino({ name: 'server' })
 const app: Express = express()
@@ -19,15 +20,14 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(cors({ origin: env.CORS_ORIGIN, credentials: true }))
 app.use(helmet())
-app.use(requestLogger())
+app.use(requestLogger)
 
+// Routers
 app.use(baseRouter)
 app.use(docsRouter)
+app.use('/auth', authRouter)
 
-app.use((_req, res) => {
-  res.status(404).send('Not found')
-})
-
+// Error Handler
 app.use(errorHandler)
 
 export { app, logger }

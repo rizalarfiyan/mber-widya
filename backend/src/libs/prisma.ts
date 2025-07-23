@@ -1,5 +1,5 @@
 import env from '@/utils/env-config'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@/../generated/prisma'
 
 const prisma = new PrismaClient({
   log: env.isDevelopment ? ['query', 'info', 'warn', 'error'] : ['error'],
@@ -7,3 +7,4 @@ const prisma = new PrismaClient({
 })
 
 export default prisma
+export type * from '@/../generated/prisma'

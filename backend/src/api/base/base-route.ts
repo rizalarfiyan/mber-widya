@@ -5,6 +5,7 @@ import { z } from 'zod'
 import responseBuilder from '@/api/docs/response-builder'
 import { ServiceResponse } from '@/models/response'
 import { Home, HomeSchema } from './base-model'
+import { handleResponse } from '@/utils/http-handler'
 
 const baseRegistry = new OpenAPIRegistry()
 const baseRouter: Router = Router()
@@ -27,7 +28,7 @@ baseRouter.get('/', (_req: Request, res: Response) => {
     linkedin: 'https://www.linkedin.com/in/rizalarfiyan',
   }
   const response = ServiceResponse.success('Welcome to the Widya API', data)
-  res.status(response.statusCode).send(response)
+  handleResponse(response, res)
 })
 
 baseRegistry.registerPath({
@@ -39,7 +40,7 @@ baseRegistry.registerPath({
 
 baseRouter.get('/health', (_req: Request, res: Response) => {
   const response = ServiceResponse.success('Service is healthy', null)
-  res.status(response.statusCode).send(response)
+  handleResponse(response, res)
 })
 
 export default baseRouter
