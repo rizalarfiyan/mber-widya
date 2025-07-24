@@ -15,16 +15,45 @@ datasource db {
 }
 
 model Users {
-  id              Int      @id @default(autoincrement())
-  email           String   @unique
-  name            String
-  password        String
-  role            Role     @default(guest)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id         Int          @id @default(autoincrement())
+  email      String       @unique
+  name       String
+  password   String
+  role       UserRoleEnum @default(guest)
+  created_at DateTime     @default(now()) @map("created_at")
+  updated_at DateTime     @default(now()) @updatedAt @map("updated_at")
+
+  @@map("users")
 }
 
-enum Role {
+enum UserRoleEnum {
   guest
   admin
+
+  @@map("user_role_enum")
+}
+
+model Vehicles {
+  id         Int               @id @default(autoincrement())
+  name       String
+  status     VehicleStatusEnum @default(inactive)
+  fuel_level Float             @map("fuel_level")
+  odometer   Float
+  latitude   Float
+  longitude  Float
+  speed      Float
+  created_at DateTime          @default(now()) @map("created_at")
+  updated_at DateTime          @default(now()) @updatedAt @map("updated_at")
+
+  @@index([name], name: "idx_vehicles_name")
+  @@index([status], name: "idx_vehicles_status")
+  @@index([speed], name: "idx_vehicles_speed")
+  @@map("vehicles")
+}
+
+enum VehicleStatusEnum {
+  active
+  inactive
+
+  @@map("vehicle_status_enum")
 }

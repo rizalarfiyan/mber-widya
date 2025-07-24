@@ -4,7 +4,7 @@
     "type": "module",
     "scripts": {
         "dev": "tsx watch --clear-screen=false src/index.ts | pino-pretty",
-        "lint": "run-p prettier eslint",
+        "lint": "run-p prettier eslint db:format",
         "check": "run-p prettier:check eslint:check",
         "eslint": "eslint . --fix",
         "eslint:check": "eslint .",
@@ -16,6 +16,7 @@
         "db:push": "prisma db push",
         "db:studio": "prisma studio",
         "db:seed": "prisma db seed",
+        "db:format": "prisma format",
         "postinstall": "prisma generate"
     },
     "devDependencies": {

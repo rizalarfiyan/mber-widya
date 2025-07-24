@@ -21,12 +21,17 @@ export class ServiceResponse<T = null> {
   static failure<T>(message: string, data: T, statusCode: number = StatusCodes.BAD_REQUEST) {
     return new ServiceResponse(false, message, data, statusCode)
   }
+
+  public toResponse() {
+    return {
+      message: this.message,
+      data: this.data,
+    }
+  }
 }
 
 export const ServiceResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
   z.object({
-    success: z.boolean(),
     message: z.string(),
     data: dataSchema.optional(),
-    statusCode: z.number(),
   })
