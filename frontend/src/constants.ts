@@ -6,6 +6,7 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localho
 
 // Key Storage
 export const KEY_ACCESS_TOKEN = 'access_token'
+export const KEY_THEME = 'theme'
 
 // Message
 export const MESSAGE_INTERNAL_SERVER_ERROR = 'An error occurred, please try again later'
