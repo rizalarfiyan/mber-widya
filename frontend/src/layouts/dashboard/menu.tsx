@@ -15,7 +15,7 @@ interface MenuProps {
 const Menu = ({ isOpen }: MenuProps) => (
   <ScrollArea className="[&>div>div[style]]:!block">
     <nav className="mt-4 h-full w-full">
-      <ul className="flex min-h-[calc(100vh-48px-36px-16px-16px)] flex-col items-start space-y-1 px-2 lg:min-h-[calc(100vh-32px-40px-16px)]">
+      <ul className="flex min-h-[calc(100vh-48px-36px-16px-36px)] flex-col items-start space-y-1 px-2 lg:min-h-[calc(100vh-32px-40px-36px)]">
         {MENU.map(({ groupLabel, menus }, index) => (
           <li className={cn('w-full', groupLabel ? 'pt-5' : '')} key={index}>
             <MenuGroupLabel label={groupLabel} isOpen={isOpen} />

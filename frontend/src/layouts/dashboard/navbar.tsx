@@ -7,8 +7,8 @@ interface NavbarProps {
 }
 
 const Navbar = ({ title }: NavbarProps) => (
-  <header className="shadow-smooth sticky top-0 z-10 w-full bg-white dark:bg-slate-800">
-    <div className="mx-4 flex h-14 items-center sm:mx-8">
+  <header className="shadow-smooth sticky top-0 z-10 w-full bg-white py-2 dark:bg-slate-800">
+    <div className="mx-4 flex h-14 items-center sm:mx-8 lg:ml-20">
       <div className="flex items-center space-x-4 lg:space-x-0">
         <SheetMenu />
         <h1 className="font-bold">{title}</h1>

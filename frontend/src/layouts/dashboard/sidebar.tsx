@@ -19,8 +19,14 @@ const Sidebar = () => {
       )}>
       <SidebarToggle isOpen={isOpen} setIsOpen={toggleOpen} />
       <div className="shadow-smooth relative flex h-full flex-col overflow-y-auto px-3 py-4">
-        <Button variant="link" asChild>
-          <Link to="/dashboard">{!isOpen ? <LogoOnly className="size-8" /> : <Logo className="size-8 w-auto" />}</Link>
+        <Button variant="link" asChild className="h-14 overflow-hidden">
+          <Link to="/dashboard">
+            {!isOpen ? (
+              <LogoOnly className="size-10 dark:text-white" />
+            ) : (
+              <Logo className="size-10 w-auto dark:text-white" />
+            )}
+          </Link>
         </Button>
         <Menu isOpen={isOpen} />
       </div>

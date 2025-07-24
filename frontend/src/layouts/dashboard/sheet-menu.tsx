@@ -15,9 +15,12 @@ const SheetMenu = () => (
     </SheetTrigger>
     <SheetContent className="flex h-full flex-col px-3 sm:w-72" side="left">
       <SheetHeader>
-        <Button className="flex items-center justify-center pt-1 pb-2" variant="link" asChild>
+        <Button
+          className="mt-6 -mb-6 flex h-14 items-center justify-center overflow-hidden pt-1 pb-2"
+          variant="link"
+          asChild>
           <Link to="/dashboard" className="flex items-center gap-2">
-            <Logo className="mx-auto size-10 w-auto" />
+            <Logo className="mx-auto size-10 w-auto dark:text-white" />
             <SheetTitle className="sr-only">{APP_NAME}</SheetTitle>
           </Link>
         </Button>
