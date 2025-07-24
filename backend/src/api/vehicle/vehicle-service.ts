@@ -3,10 +3,13 @@ import vehicleRepository from './vehicle-repository'
 
 class VehicleService {
   async create(payload: CreateVehicle['body']): Promise<void> {
-    vehicleRepository.create(payload)
+    await vehicleRepository.create(payload)
   }
   async update(id: number, payload: UpdateVehicle['body']): Promise<void> {
-    vehicleRepository.update(id, payload)
+    await vehicleRepository.update(id, payload)
+  }
+  async delete(id: number): Promise<void> {
+    await vehicleRepository.delete(id)
   }
 }
 

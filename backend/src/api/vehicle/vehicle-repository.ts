@@ -28,6 +28,11 @@ class VehicleRepository {
       data,
     })
   }
+  async delete(id: number): Promise<Vehicles | null> {
+    return prisma.vehicles.delete({
+      where: { id },
+    })
+  }
 }
 
 const vehicleRepository = new VehicleRepository()

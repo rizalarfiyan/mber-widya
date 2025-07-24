@@ -11,7 +11,6 @@ class AuthController {
     if (password.length < 6) {
       throw new AppError(StatusCodes.UNAUTHORIZED, 'Invalid email or password')
     }
-
     const login = await authService.login(email, password)
     const response = ServiceResponse.success('Successfully logged in', login)
     handleResponse(response, res)

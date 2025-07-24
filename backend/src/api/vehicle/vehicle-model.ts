@@ -70,3 +70,10 @@ export const UpdateVehicleSchema = z.object({
   }),
   body: RequestVehicleSchema,
 })
+
+export type DeleteVehicle = z.infer<typeof DeleteVehicleSchema>
+export const DeleteVehicleSchema = z.object({
+  params: z.object({
+    id: baseValidation.id,
+  }),
+})

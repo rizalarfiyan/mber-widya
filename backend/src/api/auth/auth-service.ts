@@ -1,9 +1,10 @@
+import { UserRole } from '@/models/base'
 import { AppError } from '@/models/error'
-import authRepository from './auth-repository'
-import { StatusCodes } from 'http-status-codes'
 import { compare } from '@/utils/bcrypy'
-import { Login, UserRole } from './auth-model'
 import { generateToken } from '@/utils/jwt'
+import { StatusCodes } from 'http-status-codes'
+import { Login } from './auth-model'
+import authRepository from './auth-repository'
 
 class AuthService {
   async login(email: string, password: string): Promise<Login> {

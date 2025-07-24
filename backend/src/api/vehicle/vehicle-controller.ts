@@ -23,6 +23,12 @@ class VehicleController {
     const response = ServiceResponse.success('Successfully updated vehicle', null)
     handleResponse(response, res)
   })
+  delete = asyncWrapper(async (req, res) => {
+    const id = parseId(req.params.id)
+    await vehicleService.delete(id)
+    const response = ServiceResponse.success('Successfully deleted vehicle', null)
+    handleResponse(response, res)
+  })
 }
 
 const vehicleController = new VehicleController()
