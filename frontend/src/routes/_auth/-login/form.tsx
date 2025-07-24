@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import useAuth from '@/store/use-auth'
 import { useAxios } from '@/utils/axios'
 import { apiErrorHandler } from '@/utils/response'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,6 +9,9 @@ import { Eye, EyeOff, KeyRound, User } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useShallow } from 'zustand/react/shallow'
+import type { IAuthLogin } from '@/types/auth'
+import type { BaseResponse } from '@/types/response'
 
 const loginSchema = z.object({
   email: z.string('Invalid email address'),
@@ -17,6 +21,8 @@ const loginSchema = z.object({
 type ILoginSchema = z.infer<typeof loginSchema>
 
 const LoginForm = () => {
+  const [login] = useAuth(useShallow(state => [state.login]))
+
   const form = useForm<ILoginSchema>({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
@@ -26,7 +32,7 @@ const LoginForm = () => {
     },
   })
 
-  const [{ loading }, action] = useAxios<null, ILoginSchema>(
+  const [{ loading }, action] = useAxios<BaseResponse<IAuthLogin>, ILoginSchema>(
     {
       url: '/auth/login',
       method: 'POST',
@@ -47,8 +53,11 @@ const LoginForm = () => {
     await action({
       data: values,
     })
-      .then(() => {
+      .then(values => {
         form.reset()
+        const { user, token } = values.data.data
+        login(user, token)
+        // TODO: redirect to dashboard
       })
       .catch(error => apiErrorHandler(error, form))
   }

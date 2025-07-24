@@ -12,3 +12,9 @@ export const MESSAGE_INTERNAL_SERVER_ERROR = 'An error occurred, please try agai
 export const MESSAGE_UNAUTHORIZED = 'You are not authorized to access this page, please login again'
 export const MESSAGE_SESSION_EXPIRED = 'Session expired, please login again.'
 export const MESSAGE_MUST_BE_LOGGED_IN = 'You must be logged in to access this page.'
+
+// Enum
+export const USER_ROLE = {
+  GUEST: 'guest',
+  ADMIN: 'admin',
+} as const

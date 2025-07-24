@@ -1,5 +1,6 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router'
+import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 import * as React from 'react'
+import type { IRouterContext } from '@/types/route'
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
@@ -10,7 +11,7 @@ const TanStackRouterDevtools =
         })),
       )
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<IRouterContext>()({
   component: () => (
     <>
       <Outlet />
