@@ -1,7 +1,8 @@
 import '@/assets/styles/tailwind.css'
-import { routeTree } from './routeTree.gen'
 import LoadingScreen from '@/components/loading-screen'
 import NotFound from '@/components/not-found'
+import { Toaster } from '@/components/ui/sonner'
+import { routeTree } from '@/routeTree.gen'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { createRoot } from 'react-dom/client'
 
@@ -24,5 +25,10 @@ declare module '@tanstack/react-router' {
 const rootElement = document.getElementById('root')!
 if (!rootElement.innerHTML) {
   const root = createRoot(rootElement)
-  root.render(<RouterProvider router={router} />)
+  root.render(
+    <>
+      <RouterProvider router={router} />
+      <Toaster />
+    </>,
+  )
 }

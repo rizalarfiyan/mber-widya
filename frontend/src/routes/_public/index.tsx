@@ -6,7 +6,7 @@ const PageComponent = () => (
     <Ornament />
     <div className="relative container mx-auto flex h-full flex-1 flex-col items-center justify-center gap-2 py-10">
       <h1 className="text-4xl font-semibold">Home Page</h1>
-      <p className="mx-auto max-w-xs text-center text-slate-600 dark:text-slate-300">
+      <p className="text-muted-foreground mx-auto max-w-xs text-center">
         <span>This is a placeholder page. Check out our </span>
         <Link
           to="/"

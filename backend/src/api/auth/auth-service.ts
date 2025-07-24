@@ -9,7 +9,7 @@ class AuthService {
   async login(email: string, password: string): Promise<Login> {
     const user = await authRepository.getByEmail(email, ['id', 'name', 'email', 'password', 'role'])
     if (!user || !compare(password, user.password)) {
-      throw new AppError(StatusCodes.BAD_REQUEST, 'Invalid email or password')
+      throw new AppError(StatusCodes.UNAUTHORIZED, 'Invalid email or password')
     }
 
     const token = generateToken(user.id)

@@ -9,7 +9,7 @@ const NotFound = () => (
       <div className="mx-auto max-w-lg space-y-6 py-10 text-center">
         <div className="max-w-sm space-y-3">
           <h2 className="text-4xl font-bold tracking-tight lg:text-5xl">Page Not Found</h2>
-          <p className="text-slate-600 dark:text-slate-300">
+          <p className="text-muted-foreground">
             Sorry, the page you are looking for could not be found or has been removed.
           </p>
         </div>
