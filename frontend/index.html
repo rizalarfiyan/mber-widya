@@ -7,19 +7,22 @@
         <title>Widya - Muhamad Rizal Arfiyan</title>
         <script type="text/javascript">
             function setTheme(isDark = false) {
-              window.localStorage.setItem('theme', isDark ? 'dark' : 'light')
-              const cls = document.documentElement.classList
-              isDark ? cls.add('dark') : cls.remove('dark')
+                window.localStorage.setItem('theme', isDark ? 'dark' : 'light')
+                const cls = document.documentElement.classList
+                isDark ? cls.add('dark') : cls.remove('dark')
             }
 
-            if (window.localStorage.getItem('theme') === 'dark' || (!('theme' in window.localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-              setTheme(true)
+            if (
+                window.localStorage.getItem('theme') === 'dark' ||
+                (!('theme' in window.localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+            ) {
+                setTheme(true)
             } else {
-              setTheme(false)
+                setTheme(false)
             }
         </script>
     </head>
-    <body class="bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 scroll-smooth font-sans antialiased">
+    <body class="scroll-smooth bg-slate-50 font-sans text-slate-800 antialiased dark:bg-slate-800 dark:text-slate-100">
         <div id="root"></div>
         <script type="module" src="/src/main.tsx"></script>
     </body>
