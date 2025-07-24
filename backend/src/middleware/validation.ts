@@ -1,10 +1,9 @@
 import type { NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import type { ZodError, ZodType } from 'zod'
-
 import { ServiceResponse } from '@/models/response'
 
-const validateRequest = (schema: ZodType) => async (req: Request, res: Response, next: NextFunction) => {
+const validation = (schema: ZodType) => async (req: Request, res: Response, next: NextFunction) => {
   try {
     await schema.parseAsync({ body: req.body, query: req.query, params: req.params })
     next()
@@ -32,4 +31,4 @@ const validateRequest = (schema: ZodType) => async (req: Request, res: Response,
     res.status(serviceResponse.statusCode).send(serviceResponse)
   }
 }
-export default validateRequest
+export default validation

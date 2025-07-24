@@ -1,11 +1,11 @@
 import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi'
 import { Router } from 'express'
-
+import validation from '@/middleware/validation'
 import responseBuilder from '@/api/docs/response-builder'
 import requestBody from '@/api/docs/request-body'
 import authController from './auth-controller'
-import { LoginSchema, RequestLoginSchema } from './auth-model'
-import validateRequest from '@/middleware/validation'
+import { AuthSchema, LoginSchema, RequestLoginSchema } from './auth-model'
+import authentication from '@/middleware/authentication'
 
 const authRegistry = new OpenAPIRegistry()
 const authRouter: Router = Router()
@@ -22,7 +22,17 @@ authRegistry.registerPath({
   responses: responseBuilder(LoginSchema, 'Successfully logged in'),
 })
 
-authRouter.post('/login', validateRequest(RequestLoginSchema), authController.login)
+authRouter.post('/login', validation(RequestLoginSchema), authController.login)
+
+authRegistry.registerPath({
+  method: 'get',
+  path: '/auth/me',
+  tags: ['Auth'],
+  security: [{ accessToken: [] }],
+  responses: responseBuilder(AuthSchema, 'Successfully get me'),
+})
+
+authRouter.get('/me', authentication(), authController.me)
 
 export default authRouter
 export { authRegistry }

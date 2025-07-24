@@ -6,6 +6,14 @@ export type OpenAPIDocument = ReturnType<OpenApiGeneratorV3['generateDocument']>
 
 const documentGenerator = (): OpenAPIDocument => {
   const registry = new OpenAPIRegistry([baseRegistry, authRegistry])
+
+  registry.registerComponent('securitySchemes', 'accessToken', {
+    type: 'http',
+    scheme: 'bearer',
+    bearerFormat: 'JWT',
+    description: 'JSON Web Token (JWT) authentication',
+  })
+
   const generator = new OpenApiGeneratorV3(registry.definitions)
 
   return generator.generateDocument({

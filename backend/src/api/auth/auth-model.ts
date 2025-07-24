@@ -3,12 +3,17 @@ import { z } from 'zod'
 
 extendZodWithOpenApi(z)
 
+export enum UserRole {
+  GUEST = 'guest',
+  ADMIN = 'admin',
+}
+
 export type Auth = z.infer<typeof AuthSchema>
 export const AuthSchema = z.object({
   id: z.number(),
   email: z.email(),
   name: z.string(),
-  role: z.enum(['ADMIN', 'USER']),
+  role: z.enum(UserRole),
 })
 
 export type User = z.infer<typeof UserSchema>
@@ -33,5 +38,3 @@ export const LoginSchema = z.object({
   user: AuthSchema,
   token: z.string(),
 })
-
-export type JWTInfo = Pick<Auth, 'id' | 'name' | 'email' | 'role'>

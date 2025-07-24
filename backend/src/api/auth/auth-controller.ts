@@ -9,11 +9,16 @@ const authController = {
   login: asyncWrapper(async (req, res) => {
     const { email, password } = req.body
     if (password.length < 6) {
-      throw new AppError('Invalid email or password', StatusCodes.BAD_REQUEST)
+      throw new AppError(StatusCodes.BAD_REQUEST, 'Invalid email or password')
     }
 
     const login = await authService.login(email, password)
     const response = ServiceResponse.success('Successfully logged in', login)
+    handleResponse(response, res)
+  }),
+  me: asyncWrapper(async (req, res) => {
+    const user = res.locals.user!
+    const response = ServiceResponse.success('Successfully get me', user)
     handleResponse(response, res)
   }),
 }

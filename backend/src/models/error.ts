@@ -3,7 +3,7 @@ import { getReasonPhrase, StatusCodes } from 'http-status-codes'
 export class AppError extends Error {
   private readonly statusCodes: StatusCodes
 
-  constructor(message?: string, statusCodes = StatusCodes.INTERNAL_SERVER_ERROR) {
+  constructor(statusCodes = StatusCodes.INTERNAL_SERVER_ERROR, message?: string) {
     if (!message) message = getReasonPhrase(statusCodes)
     super(message)
     this.statusCodes = statusCodes
