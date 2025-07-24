@@ -1,9 +1,12 @@
-import { CreateVehicle } from './vehicle-model'
+import { CreateVehicle, UpdateVehicle } from './vehicle-model'
 import vehicleRepository from './vehicle-repository'
 
 class VehicleService {
   async create(payload: CreateVehicle['body']): Promise<void> {
     vehicleRepository.create(payload)
+  }
+  async update(id: number, payload: UpdateVehicle['body']): Promise<void> {
+    vehicleRepository.update(id, payload)
   }
 }
 

@@ -14,9 +14,17 @@ class VehicleRepository {
       select,
     })
   }
-
   async create(data: Omit<Vehicles, 'id' | 'created_at' | 'updated_at'>): Promise<Vehicles> {
     return prisma.vehicles.create({
+      data,
+    })
+  }
+  async update(
+    id: number,
+    data: Partial<Omit<Vehicles, 'id' | 'created_at' | 'updated_at'>>,
+  ): Promise<Vehicles | null> {
+    return prisma.vehicles.update({
+      where: { id },
       data,
     })
   }
