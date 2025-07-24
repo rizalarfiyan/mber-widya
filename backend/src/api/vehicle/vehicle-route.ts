@@ -2,15 +2,28 @@ import requestBody from '@/api/docs/request-body'
 import responseBuilder from '@/api/docs/response-builder'
 import authentication from '@/middleware/authentication'
 import validation from '@/middleware/validation'
-import { UserRole } from '@/models/base'
+import { ParamIdSchema, UserRole } from '@/models/base'
 import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi'
 import { Router } from 'express'
 import { z } from 'zod'
 import vehicleController from './vehicle-controller'
-import { CreateVehicleSchema, DeleteVehicleSchema, UpdateVehicleSchema } from './vehicle-model'
+import { CreateVehicleSchema, UpdateVehicleSchema, VehicleDetailSchema } from './vehicle-model'
 
 const vehicleRegistry = new OpenAPIRegistry()
 const vehicleRouter: Router = Router()
+
+vehicleRegistry.registerPath({
+  method: 'get',
+  path: '/vehicle/{id}',
+  tags: ['Vehicle'],
+  security: [{ accessToken: [] }],
+  request: {
+    params: ParamIdSchema.shape.params,
+  },
+  responses: responseBuilder(VehicleDetailSchema, 'Successfully retrieved vehicle details'),
+})
+
+vehicleRouter.get('/:id', authentication(), validation(ParamIdSchema), vehicleController.detail)
 
 vehicleRegistry.registerPath({
   method: 'post',
@@ -45,12 +58,12 @@ vehicleRegistry.registerPath({
   tags: ['Vehicle'],
   security: [{ accessToken: [] }],
   request: {
-    params: DeleteVehicleSchema.shape.params,
+    params: ParamIdSchema.shape.params,
   },
   responses: responseBuilder(z.null(), 'Successfully deleted vehicle'),
 })
 
-vehicleRouter.delete('/:id', authentication(UserRole.ADMIN), validation(DeleteVehicleSchema), vehicleController.delete)
+vehicleRouter.delete('/:id', authentication(UserRole.ADMIN), validation(ParamIdSchema), vehicleController.delete)
 
 export default vehicleRouter
 export { vehicleRegistry }

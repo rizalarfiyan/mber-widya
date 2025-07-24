@@ -10,6 +10,12 @@ class VehicleController {
   private extractPayload(req: Request) {
     return pick(req.body, ['name', 'status', 'speed', 'fuel_level', 'odometer', 'latitude', 'longitude'])
   }
+  detail = asyncWrapper(async (req, res) => {
+    const id = parseId(req.params.id)
+    const vehicles = await vehicleService.detail(id)
+    const response = ServiceResponse.success('Successfully retrieved vehicle details', vehicles)
+    handleResponse(response, res)
+  })
   create = asyncWrapper(async (req, res) => {
     const payload = this.extractPayload(req)
     await vehicleService.create(payload)

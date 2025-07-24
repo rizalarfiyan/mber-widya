@@ -12,3 +12,10 @@ export const baseValidation = {
     .transform(Number)
     .refine(num => num > 0, 'ID must be a positive number'),
 }
+
+export type ParamId = z.infer<typeof ParamIdSchema>
+export const ParamIdSchema = z.object({
+  params: z.object({
+    id: baseValidation.id,
+  }),
+})

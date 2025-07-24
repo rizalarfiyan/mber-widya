@@ -1,7 +1,16 @@
-import { CreateVehicle, UpdateVehicle } from './vehicle-model'
+import { AppError } from '@/models/error'
+import { CreateVehicle, UpdateVehicle, VehicleDetail } from './vehicle-model'
 import vehicleRepository from './vehicle-repository'
+import { StatusCodes } from 'http-status-codes'
 
 class VehicleService {
+  async detail(id: number): Promise<VehicleDetail> {
+    const data = await vehicleRepository.getById(id)
+    if (!data) {
+      throw new AppError(StatusCodes.NOT_FOUND, 'Vehicle not found')
+    }
+    return data
+  }
   async create(payload: CreateVehicle['body']): Promise<void> {
     await vehicleRepository.create(payload)
   }
