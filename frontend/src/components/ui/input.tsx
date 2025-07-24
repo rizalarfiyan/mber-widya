@@ -1,6 +1,5 @@
 import { cn } from '@/utils/class-name'
 import type { LucideIcon } from 'lucide-react'
-import type * as React from 'react'
 
 interface InputProps extends React.ComponentProps<'input'> {
   wrapperClassName?: string

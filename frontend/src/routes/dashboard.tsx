@@ -1,12 +1,9 @@
 import { MESSAGE_MUST_BE_LOGGED_IN } from '@/constants'
-import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
+import Dashboard from '@/layouts/dashboard'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 import { toast } from 'sonner'
 
-function Layout() {
-  return <Outlet />
-}
-
-export const Route = createFileRoute('/dashboard/_layout')({
+export const Route = createFileRoute('/dashboard')({
   beforeLoad: ({ context, location }) => {
     if (context?.user) return
     toast.error(MESSAGE_MUST_BE_LOGGED_IN)
@@ -18,5 +15,5 @@ export const Route = createFileRoute('/dashboard/_layout')({
       },
     })
   },
-  component: () => <Layout />,
+  component: Dashboard,
 })

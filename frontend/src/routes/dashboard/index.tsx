@@ -1,7 +1,12 @@
+import ContentLayout from '@/components/admin-panel/content-layout'
 import { createFileRoute } from '@tanstack/react-router'
 
 function RouteComponent() {
-  return <div>Hello "/dashboard/"!</div>
+  return (
+    <ContentLayout title="Test">
+      <div>Test</div>
+    </ContentLayout>
+  )
 }
 
 export const Route = createFileRoute('/dashboard/')({
