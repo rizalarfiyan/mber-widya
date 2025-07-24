@@ -1,5 +1,6 @@
-import { Auth, UserRole } from '@/api/auth/auth-model'
+import { Auth } from '@/api/auth/auth-model'
 import authRepository from '@/api/auth/auth-repository'
+import { UserRole } from '@/models/base'
 import { AppError } from '@/models/error'
 import asyncWrapper from '@/utils/async-wrapper'
 import { verifyToken } from '@/utils/jwt'

@@ -7,7 +7,7 @@ import { AppError } from '@/models/error'
 
 const notFoundHandler: RequestHandler = (_req, res) => {
   const response = ServiceResponse.success('Page Not Found', null, StatusCodes.NOT_FOUND)
-  res.status(response.statusCode).send(response)
+  handleResponse(response, res)
 }
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {

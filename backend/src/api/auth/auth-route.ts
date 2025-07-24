@@ -10,8 +10,6 @@ import authentication from '@/middleware/authentication'
 const authRegistry = new OpenAPIRegistry()
 const authRouter: Router = Router()
 
-authRegistry.register('login', LoginSchema)
-
 authRegistry.registerPath({
   method: 'post',
   path: '/auth/login',

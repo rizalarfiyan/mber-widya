@@ -1,12 +1,8 @@
+import { UserRole } from '@/models/base'
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'
 import { z } from 'zod'
 
 extendZodWithOpenApi(z)
-
-export enum UserRole {
-  GUEST = 'guest',
-  ADMIN = 'admin',
-}
 
 export type Auth = z.infer<typeof AuthSchema>
 export const AuthSchema = z.object({
@@ -21,8 +17,8 @@ export const UserSchema = z.union([
   AuthSchema,
   z.object({
     password: z.string(),
-    createdAt: z.date(),
-    updatedAt: z.date(),
+    created_at: z.date(),
+    updated_at: z.date(),
   }),
 ])
 

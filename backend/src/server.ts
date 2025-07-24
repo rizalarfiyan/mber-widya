@@ -1,6 +1,7 @@
 import baseRouter from '@/api/base/base-route'
 import docsRouter from '@/api/docs/docs-route'
 import authRouter from '@/api/auth/auth-route'
+import vehicleRouter from '@/api/vehicle/vehicle-route'
 import errorHandler from '@/middleware/error-handler'
 import requestLogger from '@/middleware/request-logger'
 import env from '@/utils/env-config'
@@ -26,6 +27,7 @@ app.use(requestLogger)
 app.use(baseRouter)
 app.use(docsRouter)
 app.use('/auth', authRouter)
+app.use('/vehicle', vehicleRouter)
 
 // Error Handler
 app.use(errorHandler)

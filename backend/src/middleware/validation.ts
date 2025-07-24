@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import type { ZodError, ZodType } from 'zod'
 import { ServiceResponse } from '@/models/response'
+import { handleResponse } from '@/utils/http-handler'
 
 const validation = (schema: ZodType) => async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -26,9 +27,8 @@ const validation = (schema: ZodType) => async (req: Request, res: Response, next
       errorMessage = `Invalid input: ${fieldPath}: ${firstIssue.message}`
     }
 
-    const statusCode = StatusCodes.BAD_REQUEST
-    const serviceResponse = ServiceResponse.failure(errorMessage, errorData, statusCode)
-    res.status(serviceResponse.statusCode).send(serviceResponse)
+    const response = ServiceResponse.failure(errorMessage, errorData, StatusCodes.BAD_REQUEST)
+    handleResponse(response, res)
   }
 }
 export default validation

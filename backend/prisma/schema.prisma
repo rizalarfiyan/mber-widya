@@ -17,8 +17,8 @@ datasource db {
 model Users {
   id         Int          @id @default(autoincrement())
   email      String       @unique
-  name       String
-  password   String
+  name       String       @db.VarChar(32)
+  password   String       @db.VarChar(72)
   role       UserRoleEnum @default(guest)
   created_at DateTime     @default(now()) @map("created_at")
   updated_at DateTime     @default(now()) @updatedAt @map("updated_at")
@@ -35,7 +35,7 @@ enum UserRoleEnum {
 
 model Vehicles {
   id         Int               @id @default(autoincrement())
-  name       String
+  name       String            @db.VarChar(32)
   status     VehicleStatusEnum @default(inactive)
   fuel_level Float             @map("fuel_level")
   odometer   Float
