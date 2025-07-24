@@ -1,5 +1,6 @@
 import ToggleDarkMode from '@/components/toggle-dark-mode'
 import { Button } from '@/components/ui/button'
+import UserNav from '@/components/user-nav'
 import Logo from '@/logo'
 import useAuth from '@/store/use-auth'
 import { Link } from '@tanstack/react-router'
@@ -15,8 +16,9 @@ const Header = () => {
         <div className="flex gap-3">
           <ToggleDarkMode />
           <Button asChild variant="default">
-            {user ? <Link to="/dashboard">Dashboard</Link> : <Link to="/login">Login</Link>}
+            {!user && <Link to="/login">Login</Link>}
           </Button>
+          <UserNav />
         </div>
       </div>
     </header>

@@ -1,6 +1,6 @@
-import { SheetMenu } from '@/components/admin-panel/sheet-menu'
-import UserNav from '@/components/admin-panel/user-nav'
+import SheetMenu from '@/components/admin-panel/sheet-menu'
 import ToggleDarkMode from '@/components/toggle-dark-mode'
+import UserNav from '@/components/user-nav'
 
 interface NavbarProps {
   title: string
@@ -13,7 +13,7 @@ const Navbar = ({ title }: NavbarProps) => (
         <SheetMenu />
         <h1 className="font-bold">{title}</h1>
       </div>
-      <div className="flex flex-1 items-center justify-end">
+      <div className="flex flex-1 items-center justify-end gap-3">
         <ToggleDarkMode />
         <UserNav />
       </div>

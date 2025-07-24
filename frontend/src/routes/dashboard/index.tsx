@@ -3,8 +3,8 @@ import { createFileRoute } from '@tanstack/react-router'
 
 function RouteComponent() {
   return (
-    <ContentLayout title="Test">
-      <div>Test</div>
+    <ContentLayout title="Dashboard">
+      <div>Dashboard</div>
     </ContentLayout>
   )
 }
