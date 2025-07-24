@@ -1,7 +1,7 @@
 import Illustration from '@/assets/illustration/auth.svg'
+import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { APP_NAME } from '@/constants'
-import Logo from '@/logo'
 import { Link, Outlet } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
 

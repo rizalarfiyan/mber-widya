@@ -1,4 +1,4 @@
-import Logo from '@/logo'
+import Logo from '@/components/logo'
 import { cn } from '@/utils/class-name'
 
 type LoadingScreenProps = React.HTMLAttributes<HTMLDivElement> & {

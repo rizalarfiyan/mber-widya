@@ -1,5 +1,5 @@
-import Footer from '@/components/admin-panel/footer'
-import Sidebar from '@/components/admin-panel/sidebar'
+import Footer from '@/layouts/dashboard/footer'
+import Sidebar from '@/layouts/dashboard/sidebar'
 import { useSidebar } from '@/store/use-sidebar'
 import { cn } from '@/utils/class-name'
 import { useShallow } from 'zustand/react/shallow'

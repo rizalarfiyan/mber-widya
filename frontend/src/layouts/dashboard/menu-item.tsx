@@ -8,12 +8,11 @@ interface MenuItemProps {
   label: string
   icon: React.ElementType
   isOpen: boolean | undefined
-  active?: boolean
 }
 
-const MenuItem = ({ href, label, icon: Icon, isOpen, active }: MenuItemProps) => {
+const MenuItem = ({ href, label, icon: Icon, isOpen }: MenuItemProps) => {
   const matchRoute = useMatchRoute()
-  const isActive = active ?? !!matchRoute({ to: href, fuzzy: true })
+  const isActive = !!((matchRoute({ to: href, fuzzy: true }) && href !== '/dashboard') || matchRoute({ to: href }))
 
   return (
     <TooltipProvider disableHoverableContent>

@@ -16,6 +16,7 @@ import { Route as PublicRouteImport } from './routes/_public'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as DashboardVehicleIndexRouteImport } from './routes/dashboard/vehicle/index'
 
 const AuthLoginLazyRouteImport = createFileRoute('/_auth/login')()
 
@@ -23,7 +24,7 @@ const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./routes/dashboard.lazy').then((d) => d.Route))
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
   getParentRoute: () => rootRouteImport,
@@ -47,17 +48,24 @@ const AuthLoginLazyRoute = AuthLoginLazyRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthRoute,
 } as any).lazy(() => import('./routes/_auth/login.lazy').then((d) => d.Route))
+const DashboardVehicleIndexRoute = DashboardVehicleIndexRouteImport.update({
+  id: '/vehicle/',
+  path: '/vehicle/',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof AuthLoginLazyRoute
   '/': typeof PublicIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/vehicle': typeof DashboardVehicleIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof AuthLoginLazyRoute
   '/': typeof PublicIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/vehicle': typeof DashboardVehicleIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -67,12 +75,18 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginLazyRoute
   '/_public/': typeof PublicIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/vehicle/': typeof DashboardVehicleIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/dashboard' | '/login' | '/' | '/dashboard/'
+  fullPaths:
+    | '/dashboard'
+    | '/login'
+    | '/'
+    | '/dashboard/'
+    | '/dashboard/vehicle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/' | '/dashboard'
+  to: '/login' | '/' | '/dashboard' | '/dashboard/vehicle'
   id:
     | '__root__'
     | '/_auth'
@@ -81,6 +95,7 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_public/'
     | '/dashboard/'
+    | '/dashboard/vehicle/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -133,6 +148,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginLazyRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/dashboard/vehicle/': {
+      id: '/dashboard/vehicle/'
+      path: '/vehicle'
+      fullPath: '/dashboard/vehicle'
+      preLoaderRoute: typeof DashboardVehicleIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
@@ -159,10 +181,12 @@ const PublicRouteWithChildren =
 
 interface DashboardRouteChildren {
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardVehicleIndexRoute: typeof DashboardVehicleIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardIndexRoute: DashboardIndexRoute,
+  DashboardVehicleIndexRoute: DashboardVehicleIndexRoute,
 }
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(

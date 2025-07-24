@@ -1,7 +1,7 @@
+import Logo from '@/components/logo'
 import ToggleDarkMode from '@/components/toggle-dark-mode'
 import { Button } from '@/components/ui/button'
 import UserNav from '@/components/user-nav'
-import Logo from '@/logo'
 import useAuth from '@/store/use-auth'
 import { Link } from '@tanstack/react-router'
 import { useShallow } from 'zustand/react/shallow'

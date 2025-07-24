@@ -1,6 +1,6 @@
-import SheetMenu from '@/components/admin-panel/sheet-menu'
 import ToggleDarkMode from '@/components/toggle-dark-mode'
 import UserNav from '@/components/user-nav'
+import SheetMenu from '@/layouts/dashboard/sheet-menu'
 
 interface NavbarProps {
   title: string

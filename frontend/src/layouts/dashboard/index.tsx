@@ -1,4 +1,4 @@
-import AdminPanelLayout from '@/components/admin-panel/admin-panel-layout'
+import AdminPanelLayout from '@/layouts/dashboard/admin-panel-layout'
 import { Outlet } from '@tanstack/react-router'
 
 const Dashboard = () => (

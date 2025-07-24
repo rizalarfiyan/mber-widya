@@ -1,5 +1,5 @@
-import CollapsedDropdownMenu from './collapsed-dropdown-menu'
-import ExpandedCollapsibleMenu from './expanded-collapsible-menu'
+import CollapsedDropdownMenu from '@/layouts/dashboard/collapsed-dropdown-menu'
+import ExpandedCollapsibleMenu from '@/layouts/dashboard/expanded-collapsible-menu'
 import { useMatchRoute } from '@tanstack/react-router'
 import { memo, useMemo } from 'react'
 import type { LucideIcon } from 'lucide-react'

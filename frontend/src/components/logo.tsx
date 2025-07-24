@@ -1,4 +1,4 @@
-import { cn } from './utils/class-name'
+import { cn } from '@/utils/class-name'
 
 type LogoProps = Omit<React.SVGProps<SVGSVGElement>, 'xmlns' | 'viewBox' | 'width' | 'height'>
 

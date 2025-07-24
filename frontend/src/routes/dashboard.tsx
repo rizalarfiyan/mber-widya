@@ -1,5 +1,4 @@
 import { MESSAGE_MUST_BE_LOGGED_IN } from '@/constants'
-import Dashboard from '@/layouts/dashboard'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { toast } from 'sonner'
 
@@ -15,5 +14,4 @@ export const Route = createFileRoute('/dashboard')({
       },
     })
   },
-  component: Dashboard,
 })

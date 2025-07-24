@@ -1,8 +1,8 @@
-import Menu from '@/components/admin-panel/menu'
+import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { APP_NAME } from '@/constants'
-import Logo from '@/logo'
+import Menu from '@/layouts/dashboard/menu'
 import { Link } from '@tanstack/react-router'
 import { MenuIcon } from 'lucide-react'
 
