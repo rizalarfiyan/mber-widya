@@ -1,0 +1,28 @@
+name: Deploy to Production Server
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Execute deployment commands on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            cd /root/mber-widya
+            git pull origin master
+            cd frontend
+            bun install
+            bun run build:prod
+            rm -rf /var/www/widya.rizalarfiyan.com/*
+            cp -r /root/mber-widya/frontend/dist/* /var/www/widya.rizalarfiyan.com/
