@@ -21,6 +21,7 @@ jobs:
           script: |
             cd /root/mber-widya
             git pull origin master
+            source ~/.bashrc
             cd frontend
             bun install
             bun run build:prod
