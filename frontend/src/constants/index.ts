@@ -19,3 +19,8 @@ export const USER_ROLE = {
   GUEST: 'guest',
   ADMIN: 'admin',
 } as const
+
+// Date
+export const DEFAULT_DATE_ERROR = '-'
+export const FORMAT_DATE = 'DD MMMM YYYY'
+export const FORMAT_DATETIME = 'DD MMMM YYYY, HH:mm:ss'

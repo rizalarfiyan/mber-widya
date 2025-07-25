@@ -1,8 +1,9 @@
+import Content from './content'
 import ContentLayout from '@/layouts/dashboard/content-layout'
 
 const Page = () => (
   <ContentLayout title="Vehicle">
-    <div>Vehicle</div>
+    <Content />
   </ContentLayout>
 )
 
