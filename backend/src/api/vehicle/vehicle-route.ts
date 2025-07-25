@@ -29,7 +29,7 @@ vehicleRegistry.registerPath({
   responses: responsePaginationBuilder(z.array(VehicleSchema), 'Successfully retrieved vehicle list'),
 })
 
-vehicleRouter.get('/', validation(ListVehicleSchema), vehicleController.list)
+vehicleRouter.get('/', authentication(), validation(ListVehicleSchema), vehicleController.list)
 
 vehicleRegistry.registerPath({
   method: 'get',
