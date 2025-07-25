@@ -3,6 +3,7 @@ export const APP_NAME = 'Widya'
 
 // API
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/'
+export const MAP_BOX_KEY = import.meta.env.VITE_MAP_BOX_KEY
 
 // Key Storage
 export const KEY_ACCESS_TOKEN = 'access_token'

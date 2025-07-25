@@ -1,7 +1,10 @@
 import Filter from './filter'
 import { Datatable } from '@/components/datatable/datatable'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { formatDatetime } from '@/utils/date'
+import { Link } from '@tanstack/react-router'
+import { Eye } from 'lucide-react'
 import { z } from 'zod'
 import type { ColumnDef } from '@/components/datatable/datatable'
 
@@ -54,6 +57,19 @@ const columns: ColumnDef[] = [
     enableHiding: false,
     enableSorting: false,
     header: 'Action',
+    cell: ({ row }) => (
+      <div className="flex items-center gap-2">
+        <Button variant="outline" size="icon" asChild>
+          <Link
+            to="/dashboard/vehicle/$id"
+            params={{
+              id: row.original.id as string,
+            }}>
+            <Eye />
+          </Link>
+        </Button>
+      </div>
+    ),
   },
 ]
 

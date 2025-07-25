@@ -201,6 +201,7 @@ export interface IDatatableContext {
   refetch: () => void
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const DatatableContext = createContext<IDatatableContext | null>(null)
 
 export function Datatable(props: DatatableProps) {
