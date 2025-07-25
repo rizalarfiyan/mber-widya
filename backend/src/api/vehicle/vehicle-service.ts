@@ -1,9 +1,24 @@
 import { AppError } from '@/models/error'
-import { CreateVehicle, UpdateVehicle, VehicleDetail } from './vehicle-model'
-import vehicleRepository from './vehicle-repository'
 import { StatusCodes } from 'http-status-codes'
+import { CreateVehicle, ListVehicle, UpdateVehicle, Vehicle, VehicleDetail } from './vehicle-model'
+import vehicleRepository from './vehicle-repository'
+import { Pagination } from '@/models/base'
 
 class VehicleService {
+  async list(payload: ListVehicle['query']): Promise<Pagination<Vehicle>> {
+    const { page, limit } = payload
+    const [total, data] = await vehicleRepository.list(payload)
+    const totalPages = Math.ceil(total / limit)
+    return {
+      content: data as Vehicle[],
+      meta: {
+        page,
+        limit,
+        total,
+        total_page: totalPages,
+      },
+    }
+  }
   async detail(id: number): Promise<VehicleDetail> {
     const data = await vehicleRepository.getById(id)
     if (!data) {

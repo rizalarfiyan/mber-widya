@@ -5,15 +5,21 @@ import { pick } from '@/utils/object'
 import { parseId } from '@/utils/parse'
 import type { Request } from 'express'
 import vehicleService from './vehicle-service'
+import { ListVehicle } from './vehicle-model'
 
 class VehicleController {
   private extractPayload(req: Request) {
     return pick(req.body, ['name', 'status', 'speed', 'fuel_level', 'odometer', 'latitude', 'longitude'])
   }
+  list = asyncWrapper(async (req, res) => {
+    const vehicles = await vehicleService.list(req.queryData as ListVehicle['query'])
+    const response = ServiceResponse.success('Successfully retrieved vehicle list', vehicles)
+    handleResponse(response, res)
+  })
   detail = asyncWrapper(async (req, res) => {
     const id = parseId(req.params.id)
-    const vehicles = await vehicleService.detail(id)
-    const response = ServiceResponse.success('Successfully retrieved vehicle details', vehicles)
+    const vehicle = await vehicleService.detail(id)
+    const response = ServiceResponse.success('Successfully retrieved vehicle details', vehicle)
     handleResponse(response, res)
   })
   create = asyncWrapper(async (req, res) => {

@@ -1,4 +1,4 @@
-import { baseValidation } from '@/models/base'
+import { baseValidation, DefaultOrder } from '@/models/base'
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'
 import { z } from 'zod'
 
@@ -15,7 +15,9 @@ export const VehicleSchema = z.object({
   name: z.string(),
   status: z.enum(VehicleStatus),
   speed: z.number(),
-  updated_at: z.date(),
+  updated_at: z.date().openapi({
+    example: '2023-10-01T12:00:00Z',
+  }),
 })
 
 export type VehicleDetail = z.infer<typeof VehicleDetailSchema>
@@ -69,4 +71,33 @@ export const UpdateVehicleSchema = z.object({
     id: baseValidation.id,
   }),
   body: RequestVehicleSchema,
+})
+
+export enum ListVehicleSort {
+  NAME = 'name',
+  STATUS = 'status',
+  SPEED = 'speed',
+  UPDATED_AT = 'updated_at',
+}
+
+export type ListVehicle = z.infer<typeof ListVehicleSchema>
+export const ListVehicleSchema = z.object({
+  query: z.object({
+    page: z
+      .string()
+      .refine(data => !Number.isNaN(Number(data)), 'Page must be a numeric value')
+      .transform(Number)
+      .refine(num => num >= 1, 'Page must be at least 1')
+      .default(1),
+    limit: z
+      .string()
+      .refine(data => !Number.isNaN(Number(data)), 'Limit must be a numeric value')
+      .transform(Number)
+      .refine(num => num >= 10 && num <= 50, 'Limit must be between 10 and 50')
+      .default(10),
+    order: z.enum(DefaultOrder).default(DefaultOrder.DESC),
+    sort: z.enum(ListVehicleSort).default(ListVehicleSort.UPDATED_AT),
+    search: z.string().optional(),
+    status: z.enum(VehicleStatus).optional(),
+  }),
 })

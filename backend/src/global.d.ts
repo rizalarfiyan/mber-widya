@@ -6,6 +6,11 @@ declare global {
       user?: Auth
     }
 
+    interface Request {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      queryData?: Record<string, any>
+    }
+
     interface Response {
       locals: Locals
     }

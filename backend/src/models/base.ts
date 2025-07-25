@@ -5,6 +5,11 @@ export enum UserRole {
   ADMIN = 'admin',
 }
 
+export enum DefaultOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+
 export const baseValidation = {
   id: z
     .string()
@@ -19,3 +24,13 @@ export const ParamIdSchema = z.object({
     id: baseValidation.id,
   }),
 })
+
+export type Pagination<T extends Record<string, unknown>> = {
+  content: T[]
+  meta: {
+    page: number
+    limit: number
+    total: number
+    total_page: number
+  }
+}

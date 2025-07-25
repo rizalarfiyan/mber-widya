@@ -1,5 +1,5 @@
 import requestBody from '@/api/docs/request-body'
-import responseBuilder from '@/api/docs/response-builder'
+import responseBuilder, { responsePaginationBuilder } from '@/api/docs/response-builder'
 import authentication from '@/middleware/authentication'
 import validation from '@/middleware/validation'
 import { ParamIdSchema, UserRole } from '@/models/base'
@@ -7,10 +7,29 @@ import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi'
 import { Router } from 'express'
 import { z } from 'zod'
 import vehicleController from './vehicle-controller'
-import { CreateVehicleSchema, UpdateVehicleSchema, VehicleDetailSchema } from './vehicle-model'
+import {
+  CreateVehicleSchema,
+  ListVehicleSchema,
+  UpdateVehicleSchema,
+  VehicleDetailSchema,
+  VehicleSchema,
+} from './vehicle-model'
 
 const vehicleRegistry = new OpenAPIRegistry()
 const vehicleRouter: Router = Router()
+
+vehicleRegistry.registerPath({
+  method: 'get',
+  path: '/vehicle',
+  tags: ['Vehicle'],
+  security: [{ accessToken: [] }],
+  request: {
+    query: ListVehicleSchema.shape.query,
+  },
+  responses: responsePaginationBuilder(z.array(VehicleSchema), 'Successfully retrieved vehicle list'),
+})
+
+vehicleRouter.get('/', validation(ListVehicleSchema), vehicleController.list)
 
 vehicleRegistry.registerPath({
   method: 'get',
