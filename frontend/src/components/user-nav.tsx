@@ -8,26 +8,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import useLogout from '@/hooks/use-logout'
 import useAuth from '@/store/use-auth'
 import { getInitialName } from '@/utils/string'
-import { Link, useNavigate } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { Globe, LayoutGrid, LogOut } from 'lucide-react'
 import { useShallow } from 'zustand/react/shallow'
 
 const UserNav = () => {
-  const [user, logout] = useAuth(useShallow(state => [state.user, state.logout]))
-  const navigate = useNavigate()
+  const user = useAuth(useShallow(state => state.user))
+  const handleLogout = useLogout()
 
   if (!user) return null
-
-  const handleLogout = async () => {
-    await logout().finally(() => {
-      navigate({
-        to: '/login',
-        replace: true,
-      })
-    })
-  }
 
   return (
     <DropdownMenu>

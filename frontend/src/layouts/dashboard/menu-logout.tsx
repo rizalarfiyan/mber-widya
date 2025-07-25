@@ -1,27 +1,15 @@
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import useAuth from '@/store/use-auth'
+import useLogout from '@/hooks/use-logout'
 import { cn } from '@/utils/class-name'
-import { useNavigate } from '@tanstack/react-router'
 import { LogOut } from 'lucide-react'
-import { useShallow } from 'zustand/react/shallow'
 
 interface MenuLogoutButtonProps {
   isOpen: boolean | undefined
 }
 
 const MenuLogoutButton = ({ isOpen }: MenuLogoutButtonProps) => {
-  const logout = useAuth(useShallow(state => state.logout))
-  const navigate = useNavigate()
-
-  const handleLogout = async () => {
-    await logout().finally(() => {
-      navigate({
-        to: '/login',
-        replace: true,
-      })
-    })
-  }
+  const handleLogout = useLogout()
 
   return (
     <TooltipProvider disableHoverableContent>
